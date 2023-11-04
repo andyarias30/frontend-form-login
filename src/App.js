@@ -1,27 +1,33 @@
 import './App.css';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
-
-import { useEffect, useState } from 'react';
-import Login from './components/Login';
-import Singup from './components/Signup';
+import Home from './pages/Home';
 import Header from './components/Header';
 import Footer from './components/Footer';
+import { useState } from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Login from './components/Login';
+import SignUp from './components/Signup';
+import Landing from './pages/Landing';
 
 function App() {
-  const [LoggedIn, setLoggedIn] = useState()
+  const [loggedIn, setLoggedIn] = useState(false)
+  const [signedUp, setSignedUp] = useState(false)
+
   return (
-   <BrowserRouter>
-   <Header />
-
-   <Routes>
-    <Route path='/'  element={<Singup />} />
-    <Route path='/login' element={<Login />} />
-    <Route path='*' element={<h2>Wrong Path</h2>} />
-   </Routes>
-
-   <Footer />
-   </BrowserRouter>
-  );
+    <>
+      <Header />
+      <hr />
+      <BrowserRouter>
+      <Routes>
+        <Route path="/login" element={<Login />}/>
+        <Route path="/" element={<SignUp />}/>
+        <Route path="/landing" element={<Landing />} />
+      </Routes>
+        <Home loggedIn={loggedIn} setLoggedIn={setLoggedIn} signedUp={signedUp} setSignedUp={setSignedUp} />
+      </BrowserRouter>
+      <hr />
+      <Footer />
+    </>
+  )
 }
 
 export default App;
